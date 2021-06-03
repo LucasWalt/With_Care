@@ -74,7 +74,7 @@
         unset($_SESSION['falha_cadastro']);
       //-->
       ?>
-                <form id="formulario">
+                <form action="cadastro_clientes_back.php" method="POST">
                     <div class="row g-3">
                         <div class="col-sm-6">
                             <label for="firstName" class="form-label">Nome</label>
@@ -121,8 +121,7 @@
                             com a <a href="">Declaração de privacidade</a>.
                         </p>
               
-                    <buttom class="w-100 btn btn-primary btn-lg align-middle" id="btn-submit" type="submit">
-                        Cadastrar</buttom>
+                        <button class="w-100 btn btn-primary btn-lg align-middle" type="submit" id="btn-submit">Cadastrar</button>
             </div>
             </form>
             </div>
@@ -133,10 +132,10 @@
     <?php
         include('layouts/rodape.php');
     ?>
-    <p class="error-validation" style="color: red;"></p>
+    <!-- <p class="error-validation" style="color: red;"></p> -->
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js\validacao_cadastro.js"></script>
+    <!-- <script src="js\validacao_cadastro.js"></script> -->
 </body>
 
 </html>

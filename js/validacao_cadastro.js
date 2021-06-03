@@ -1,5 +1,5 @@
+var qtyerro = null;
 class Validator {
-
     constructor() {
       this.validations = [
         'data-min-length',
@@ -28,7 +28,7 @@ class Validator {
       let inputsArray = [...inputs];
   
       // loop nos inputs e validação mediante aos atributos encontrados
-      inputsArray.forEach(function(input, obj) {
+      inputsArray.forEach(function(input, _obj) {
   
         // fazer validação de acordo com o atributo do input
         for(let i = 0; this.validations.length > i; i++) {
@@ -154,16 +154,15 @@ class Validator {
       }
   
     }
-  
     // método para imprimir mensagens de erro
     printMessage(input, msg) {
     
       // checa os erros presentes no input
-      let errorsQty = input.parentNode.querySelector('.error-validation');
+      qtyerro = input.parentNode.querySelector('.error-validation');
   
       // imprimir erro só se não tiver erros
-      if(errorsQty === null) {
-        let template = document.querySelector('.error-validation').cloneNode(true);
+      if(qtyerro === null) {
+        template = document.querySelector('.error-validation').cloneNode(true);
   
         template.textContent = msg;
     
@@ -180,6 +179,10 @@ class Validator {
     cleanValidations(validations) {
       validations.forEach(el => el.remove());
     }
+  }
+  
+  if (qtyerro === 0) {
+    window.location.href = "cadastro_cliente_back.php";
   }
   
   let form = document.getElementById('formulario');

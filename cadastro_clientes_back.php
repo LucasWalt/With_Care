@@ -34,27 +34,20 @@
 // Insere os dados na base.
 
     //Tabela "usuario"
-    $sql = "INSERT INTO usuario (nome, sobrenome, cpf, senha, dt_cadastro) 
-            values('$nome', '$sobrenome','$cpf','$senha', NOW())";
+    $sql = "INSERT INTO usuario (nome, sobrenome, cpf, senha, dt_cadastro) values('$nome', '$sobrenome','$cpf','$senha', NOW())";
+    $sql1 = "INSERT INTO email(id_usuario, email_1) values((select id_usuario from usuario where cpf = '$cpf'), '$email')";
+    $sql2 = "INSERT INTO endereco(id_usuario, cep) values((select id_usuario from usuario where cpf = '$cpf'), '$cep');"; 
 
-    //Tabela "email"
-    $sql1 = "INSERT INTO email(id_usuario, email_1) 
-             values((select id_usuario from usuario where cpf = '$cpf'), '$email')"; 
-    
-    //Tabela "endereco"
-    $sql2 = "INSERT INTO endereco(id_usuario, cep) 
-            values((select id_usuario from usuario where cpf = '$cpf'), '$cep')"; 
-    
 //Verifica se foram realmente inseridos.
-    if ($conexao->query($sql)   === TRUE and
-        $conexao->query($sql1)  === TRUE and
-        $conexao->query($sql2)  === TRUE){
-        
+    if  (($conexao->query($sql) === TRUE)   &&
+        ($conexao->query($sql1) === TRUE)   &&
+        ($conexao->query($sql2) === TRUE)){
+          
         $_SESSION['sucesso_cadastro'] = TRUE;
         header('Location: cadastro_clientes_front.php');
     }else {
         $_SESSION['falha_cadastro'] = TRUE;
-        header('Location: cadastro_clientes_front.php');
+       // header('Location: cadastro_clientes_front.php');
     }
 
     $conexao->close();

@@ -74,7 +74,7 @@
         unset($_SESSION['falha_cadastro']);
       //-->
       ?>
-                <form id="formulario">
+                <form action="cadastro_profissionais_back.php" method="POST">
                     <div class="row g-3">
                         <div class="row g-3">
                             <div class="col-sm-6">
@@ -151,10 +151,10 @@
     <?php
         include('layouts/rodape.php');
     ?>
-    <p class="error-validation" style="color: red;"></p>
+    <!-- <p class="error-validation" style="color: red;"></p> -->
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js\validacao_cadastro.js"></script>
+    <!-- <script src="js\validacao_cadastro.js"></script> -->
 </body>
 
 </html>
