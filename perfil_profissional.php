@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!doctype html>
 <html lang="en">
 
@@ -11,8 +14,6 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
-
-
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -24,19 +25,14 @@
         -moz-user-select: none;
         user-select: none;
     }
-
     @media (min-width: 768px) {
         .bd-placeholder-img-lg {
             font-size: 3.5rem;
-        }
-    }
-
+        }}
     .foto_perfil{
       width: 250px;
       height: 250px;
     }
-
-
     svg {
     	max-height: 100%;
     
@@ -44,13 +40,11 @@
     		overflow: hidden;
     	}
     }
-
     #main {
     	margin: 0 auto;
     	max-width: 20em;
     	width: 75%;
     }
-
     .icon {
     	display: block;
     	height: 35px;
@@ -59,16 +53,15 @@
     }
     </style>
 
-
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
 </head>
 
 <body>
-  <?php
-  include('layouts/menu_principal.php');
-  include('layouts/star_system.php');
-  ?>
+<?php
+include('layouts/menu_principal.php');
+include('layouts/star_system.php');
+?>
 
 <main>
   <div class="container mt-5 py-5">
@@ -111,9 +104,9 @@
   </div>
 </main>
 
-  <?php
-  include('layouts/rodape.php');
-  ?>
+<?php
+include('layouts/rodape.php');
+?>
 </body>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 </html>
