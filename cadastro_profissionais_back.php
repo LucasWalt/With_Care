@@ -14,9 +14,7 @@
     $cuida_idoso =             filter_input(INPUT_POST, 'cuida_idoso');
     $cuida_especiais =         filter_input(INPUT_POST, 'cuida_especiais');
 
-
-    echo $cuida_adolescente;
-    // Verifica se EMAIL e se CPF já estão cadastrados na base. 
+    // Verifica se EMAIL ou CPF já estão cadastrados na base. 
 
     $sql = "select count(*) as total from usuario where cpf = '$cpf'";
     $result = mysqli_query($conexao, $sql);
@@ -103,15 +101,15 @@
 
     //  Verifica se foram realmente inseridos ou se .
 
-    if (($conexao->query($sql_bebe)          === TRUE)  &&
-        ($conexao->query($sql_crianca)       === TRUE)  && 
-        ($conexao->query($sql_adolescente)   === TRUE)  &&
-        ($conexao->query($sql_idoso)         === TRUE)  &&
-        ($conexao->query($sql_especiais)     === TRUE)  &&
-        ($conexao->query($sql_serv)          === TRUE)  &&
-        ($conexao->query($sql_endereco)      === TRUE)  &&
-        ($conexao->query($sql_email)         === TRUE)  &&
-        ($conexao->query($sql_usuario)       === TRUE)) {
+    if ($conexao->query($sql_bebe)         &&
+        $conexao->query($sql_crianca)      && 
+        $conexao->query($sql_adolescente)  &&
+        $conexao->query($sql_idoso)        &&
+        $conexao->query($sql_especiais)    &&
+        $conexao->query($sql_serv)         &&
+        $conexao->query($sql_endereco)     &&
+        $conexao->query($sql_email)        &&
+        $conexao->query($sql_usuario)    ) {
         
         $_SESSION['sucesso_cadastro'] = TRUE;
         header('Location: cadastro_profissionais_front.php');

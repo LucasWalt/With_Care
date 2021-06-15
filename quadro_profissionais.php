@@ -4,15 +4,14 @@
 
 
     //Define o numero de perfis de profissionais iram aparecer por pagina.
-    $perfis_por_pagina = 4;
+    $perfis_por_pagina = 6;
 
     //Pegar pagina atual 
-    $pagina = intval($_GET['pagina']);
+    $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
 
-    if ($pagina == 0) {
-        header('location: http://localhost/TCC/With_Care/quadro_profissionais.php?pagina=1');
-    }
-    $inicio=$pagina*$itens_por_pagina;
+
+    $inicio=$pagina*$perfis_por_pagina - $perfis_por_pagina;
+
     //Pegar usuarios do tipo "P"(profissional) do banco de dados 
     $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.tp_usuario, B.cep FROM usuario as A 
                  INNER JOIN endereco as B on A.id_usuario = B.id_usuario 
@@ -51,6 +50,9 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <style>
+    body{
+        margin-left: 10.5%;
+    }
     .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -93,14 +95,14 @@
   
 ?>
     <main>
-        <div class="container px-4 py-5" id="featured-3" style="margin-left: 5%;">
+        <div class="container-fluid px-5 py-5" id="featured-3">
 
-            <h2 class="pb-2 border-bottom mt-5">Profissionais próximos de você</h2><h1><?php echo $pagina; ?></h1>
+            <h2 class="pb-2 border-bottom mt-5">Profissionais próximos de você</h2>
 
             <p>
-                <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    <i class="fas fa-filter"></i>
+                <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+                    aria-controls="collapseExample" >
+                    <i class="fas fa-filter" ></i>
                 </a>
             </p>
             <div class="collapse" id="collapseExample">
@@ -114,14 +116,14 @@
 
                 </div>
             </div>
-            <div class="row g-5 py-5 row-cols-1 row-cols-lg-3 ">
+            <div class="row g-5 py-5 row-cols-5 row-cols-lg-4 " >
 
                 <?php
             if ($num > 0) {
                 do{
             ?>
 
-                <div class="feature col border border-1 text-center rounded-5">
+                <div class="feature col border border-1 text-center rounded-5 m-3">
                     <a href="">
 
                         <div class="feature-icon bg-gradient border border-2 mt-5 ">
@@ -135,36 +137,44 @@
                 </div>
                 <?php }while($usuario = $execute->fetch_assoc()); }?>
             </div>
-
-            <nav aria-label="Page navigation example">
+            <?php
+				//Verificar a pagina anterior e posterior
+				$pagina_anterior = $pagina - 1;
+				$pagina_posterior = $pagina + 1;
+			?>
+            <nav class="text-center"  aria-label="Page navigation example" style="margin-left: 34%;">
                 <ul class="pagination">
                     <li class="page-item">
-                        <a class="page-link" href="" aria-label="Previous">
+                        <?php
+						if($pagina_anterior != 0){ ?>
+                        <a class="page-link" href="quadro_profissionais.php?pagina=<?php echo $pagina_anterior; ?>" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
+                        <?php }else{ ?>
+                        <span aria-hidden="true">&laquo;</span>
+                        <?php }  ?>
                     </li>
-                    <?php
-                  for ($i=1; $i < $num_paginas ; $i++) { 
-                    $estilo="";
-                    if ($pagina == $i) {
-                      $estilo = "class=\"active\"";
-                ?>
-                    <li <?php echo $estilo; ?>>
-                        <a class="page-link"
-                            href="quadro_profissionais.php?pagina=<?php echo $i;?>"><?php echo ($i); ?></a>
-                        <?php } ?>
-                    </li>
+                    <?php 
+					//Apresentar a paginacao
+					for($i = 1; $i < $num_paginas + 1; $i++){ ?>
+                    <li class="page-item"><a class="page-link" href="quadro_profissionais.php?pagina=<?php echo $i; ?>"><?php echo $i; ?></a></li>
                     <?php } ?>
                     <li class="page-item">
-                        <a class="page-link" href="" aria-label="Next">
+                        <?php
+						if($pagina_posterior <= $num_paginas){ ?>
+                        <a class="page-link" href="quadro_profissionais.php?pagina=<?php echo $pagina_posterior; ?>"
+                            aria-label="Previous">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
+                        <?php }else{ ?>
+                        <span aria-hidden="true">&raquo;</span>
+                        <?php }  ?>
                     </li>
                 </ul>
             </nav>
         </div>
     </main>
-<?php
+    <?php
   include('layouts/rodape.php');
 ?>
 </body>

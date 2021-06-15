@@ -47,7 +47,7 @@
         header('Location: cadastro_clientes_front.php');
     }else {
         $_SESSION['falha_cadastro'] = TRUE;
-       // header('Location: cadastro_clientes_front.php');
+        header('Location: cadastro_clientes_front.php');
     }
 
     $conexao->close();

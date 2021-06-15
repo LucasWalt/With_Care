@@ -40,7 +40,7 @@
 
 <body class="bg-light">
 
-<?php
+    <?php
   include('layouts/menu_principal.php');
 ?>
     <div class="container mt-5 py-5">
@@ -72,6 +72,30 @@
                 <?php
         endif;
         unset($_SESSION['falha_cadastro']);
+      //-->
+
+      //<-- Mensagem de erro ao cadastrar (CPF ja cadastrado)
+        if (isset($_SESSION['cpf_existe'])) :
+      ?>
+                <div class="alert alert-danger" role="alert">
+                    Falha ao realizar seu cadastro! <br>
+                    O <strong>CPF</strong> informado já está vinculado a uma conta.
+                </div>
+                <?php 
+      endif;
+      unset($_SESSION['cpf_existe']);
+      //-->
+      
+      //<-- Mensagem de erro ao cadastrar (EMAIL ja cadastrado)
+      if (isset($_SESSION['email_existe'])) :
+      ?>
+                <div class="alert alert-danger" role="alert">
+                    Falha ao realizar seu cadastro! <br>
+                    O <strong>email</strong> informado já está vinculado a uma conta.
+                </div>
+                <?php
+      endif;
+      unset($_SESSION['email_existe']);
       //-->
       ?>
                 <form action="cadastro_clientes_back.php" method="POST">
@@ -120,10 +144,11 @@
                             Aceito os <a href="">Termos e condições</a> e autorizo o uso de meus dados de acordo
                             com a <a href="">Declaração de privacidade</a>.
                         </p>
-              
-                        <button class="w-100 btn btn-primary btn-lg align-middle" type="submit" id="btn-submit">Cadastrar</button>
-            </div>
-            </form>
+
+                        <button class="w-100 btn btn-primary btn-lg align-middle" type="submit"
+                            id="btn-submit">Cadastrar</button>
+                    </div>
+                </form>
             </div>
     </div>
 
