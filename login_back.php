@@ -10,15 +10,17 @@
     $cpf =   mysqli_real_escape_string($conexao, $_POST['cpf']);
     $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
-    $query = "select id_usuario, cpf from usuario where cpf = '{$cpf}' and senha = md5('{$senha}')";
+    $query = "select id_usuario, cpf, nome from usuario where cpf = '$cpf' and senha = md5('$senha')";
 
     $result = mysqli_query($conexao, $query);
 
     $row = mysqli_num_rows($result);
 
+    $dados_usuario = $result->fetch_assoc();
+
     if ($row == 1) {
-        $_SESSION['cpf'] = $cpf;
-        header('Location: painel.php');
+        $_SESSION['usuario_logado'] = $dados_usuario['cpf'];
+        header('Location: verifica_login.php');
         exit();
     }else{
         $_SESSION['nao_autenticado'] = true;

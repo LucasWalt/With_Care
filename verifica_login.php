@@ -1,5 +1,6 @@
 <?php
-    if(!$_SESSION['usuario']){
-        header('Location: login_front.php');
+    if(!$_SESSION['usuario_logado']){
+        header('Location: index.php');
         exit();
     }
+?>

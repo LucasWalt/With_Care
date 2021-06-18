@@ -39,9 +39,9 @@
     $sql2 = "INSERT INTO endereco(id_usuario, cep) values((select id_usuario from usuario where cpf = '$cpf'), '$cep');"; 
 
 //Verifica se foram realmente inseridos.
-    if  (($conexao->query($sql) === TRUE)   &&
-        ($conexao->query($sql1) === TRUE)   &&
-        ($conexao->query($sql2) === TRUE)){
+    if  (($conexao->query($sql))   &&
+        ($conexao->query($sql1))   &&
+        ($conexao->query($sql2))){
           
         $_SESSION['sucesso_cadastro'] = TRUE;
         header('Location: cadastro_clientes_front.php');

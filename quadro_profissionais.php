@@ -4,7 +4,7 @@
 
 
     //Define o numero de perfis de profissionais iram aparecer por pagina.
-    $perfis_por_pagina = 6;
+    $perfis_por_pagina = 3;
 
     //Pegar pagina atual 
     $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
@@ -13,7 +13,7 @@
     $inicio=$pagina*$perfis_por_pagina - $perfis_por_pagina;
 
     //Pegar usuarios do tipo "P"(profissional) do banco de dados 
-    $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.tp_usuario, B.cep FROM usuario as A 
+    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, B.cep FROM usuario as A 
                  INNER JOIN endereco as B on A.id_usuario = B.id_usuario 
                  WHERE A.tp_usuario = 'P' LIMIT $inicio, $perfis_por_pagina;";
 
@@ -53,6 +53,10 @@
     body{
         margin-left: 10.5%;
     }
+    a{
+        text-decoration: none;
+        color: #000;
+    }
     .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -90,9 +94,8 @@
 
 <body>
 
-    <?php
+<?php
   include('layouts/menu_principal.php');
-  
 ?>
     <main>
         <div class="container-fluid px-5 py-5" id="featured-3">
@@ -105,8 +108,8 @@
                     <i class="fas fa-filter" ></i>
                 </a>
             </p>
-            <div class="collapse" id="collapseExample">
-                <div class="card card-body">
+            <div class="collapse " id="collapseExample">
+                <div class="card card-body" style="margin-right: 19%;">
                     <h3>Cuidador para...</h3>
                     <p>Bebês</p>
                     <p>Crianças</p>
@@ -116,7 +119,7 @@
 
                 </div>
             </div>
-            <div class="row g-5 py-5 row-cols-5 row-cols-lg-4 " >
+            <div class="row g-5 py-5 row-cols-5 row-cols-lg-4">
 
                 <?php
             if ($num > 0) {
@@ -124,9 +127,9 @@
             ?>
 
                 <div class="feature col border border-1 text-center rounded-5 m-3">
-                    <a href="">
+                    <a href="perfil_profissional.php?id=<?= $usuario['id_usuario']?>">
 
-                        <div class="feature-icon bg-gradient border border-2 mt-5 ">
+                        <div class="feature-icon bg-gradient border border-2 mt-5">
                         </div>
                         <h2><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome']?></h2>
 
@@ -174,14 +177,11 @@
             </nav>
         </div>
     </main>
-    <?php
+<?php
   include('layouts/rodape.php');
 ?>
 </body>
-
-
 <script src="js/bootstrap.bundle.min.js"></script>
 
 <script src="js/cheatsheet.js"></script>
-
 </html>

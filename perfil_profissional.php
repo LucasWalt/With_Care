@@ -1,5 +1,20 @@
 <?php
   session_start();
+  include('conexao.php');
+
+  $id_pagina = (isset($_GET['id']))? $_GET['id'] : 1;
+
+  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, B.cep, C.email_1, D.telefone_1, D.telefone_2,
+                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais FROM usuario as A 
+                INNER JOIN endereco as B on A.id_usuario = B.id_usuario
+                INNER JOIN email as C on A.id_usuario = C.id_usuario 
+                INNER JOIN telefone as D on A.id_usuario = D.id_usuario 
+                INNER JOIN servico as E on A.id_usuario = E.id_usuario  
+                WHERE A.id_usuario = '$id_pagina'";
+
+$execute = mysqli_query($conexao,$sql_code);
+
+$usuario = $execute->fetch_assoc();
 ?>
 <!doctype html>
 <html lang="en">
@@ -82,23 +97,61 @@ include('layouts/star_system.php');
 	<use xlink:href="#stars-5-0-star">
 	</svg></div>
 
-  <h3 class="mt-2">nome / sobrenome / idade</h3>
+  <h3 class="mt-2"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
-  <h4 class="mt-3">categorias que atende</h4>
+  <h5 class="pt-3"><?= $usuario['cep'] ?></h5>
 
-  <h5 class="pt-3">cidade</h5>
+  <p class="pt-4"><?= $usuario['descricao'] ?></p>
 
-  <p class="pt-3">formação</p>
-
-  <p class="pt-3">descrição</p>
+  <br>
+  <h5>Cuido de...</h5>
+  <div class="mt-3" style="width: 300px">
+  <?php
+      if ($usuario['especiais'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #CD03FF;">
+      Especiais
+    </div>
+  <?php
+      endif;
+      if ($usuario['criancas'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-dark d-inline-flex border border-dark" style="background-color: #F3F76C;">
+      Crianças
+    </div>
+  <?php
+      endif;
+      if ($usuario['adolescentes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #FF4561;">
+      Adolescentes
+    </div>
+  <?php
+      endif;
+      if ($usuario['idosos'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #FFAF03;">
+      Idosos
+    </div>
+  <?php
+      endif;
+      if ($usuario['bebes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #40C5EB;">
+      Bebês
+    </div>
+  <?php
+      endif;
+  ?> 
+  </div>
  
   <hr class="mt-5 mb-5">
 
-  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fab fa-whatsapp align-middle" style="font-size: 35px;"></i> (00) 00000-0000</p>
+  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fab fa-whatsapp align-middle" style="font-size: 35px;"></i> <?= $usuario['telefone_1'] ?></p>
 
-  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-phone-alt align-middle" style="font-size: 30px;"></i> (00) 00000-0000</p>
+  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-phone-alt align-middle" style="font-size: 30px;"></i> <?= $usuario['telefone_2'] ?></p>
  
-  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-at align-middle" style="font-size: 33px;"></i> email@email.com</p>
+  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-at align-middle" style="font-size: 33px;"></i> <?= $usuario['email_1'] ?></p>
   </div>
 
   </div>

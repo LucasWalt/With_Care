@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -94,13 +97,10 @@
     </button>
   </div>
 
-
   <!-- Marketing messaging and featurettes
   ================================================== -->
   <!-- Wrap the rest of the page in another container to center all the content. -->
-
   <div class="container marketing">
-
     <!-- Three columns of text below the carousel -->
     <div class="row">
       <div class="col-lg-4">
@@ -125,7 +125,6 @@
         <p><a class="btn btn-secondary" href="#">View details &raquo;</a></p>
       </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
-
 
     <!-- START THE FEATURETTES -->
 
@@ -166,21 +165,17 @@
 
       </div>
     </div>
-
+    
     <hr class="featurette-divider">
 
     <!-- /END THE FEATURETTES -->
 
   </div><!-- /.container -->
 </main>
-
 <?php 
   include('layouts/rodape.php');
 ?>
-
-
-    <script src="js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
+</body>
 </html>

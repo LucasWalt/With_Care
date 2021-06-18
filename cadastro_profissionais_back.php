@@ -40,7 +40,7 @@
 
     //Tabelas "usuario", "email" e "endereco".
     
-    $sql_usuario = "INSERT INTO usuario (nome, sobrenome, cpf, senha, dt_cadastro) values('$nome', '$sobrenome','$cpf','$senha', NOW())";
+    $sql_usuario = "INSERT INTO usuario (nome, sobrenome, cpf, senha, dt_cadastro, tp_usuario) values('$nome', '$sobrenome','$cpf','$senha', NOW(), 'P')";
     $sql_email = "INSERT INTO email(id_usuario, email_1) values((select id_usuario from usuario where cpf = '$cpf'), '$email')";
     $sql_endereco = "INSERT INTO endereco(id_usuario, cep) values((select id_usuario from usuario where cpf = '$cpf'), '$cep')";
     
@@ -101,15 +101,15 @@
 
     //  Verifica se foram realmente inseridos ou se .
 
-    if ($conexao->query($sql_bebe)         &&
-        $conexao->query($sql_crianca)      && 
-        $conexao->query($sql_adolescente)  &&
-        $conexao->query($sql_idoso)        &&
-        $conexao->query($sql_especiais)    &&
-        $conexao->query($sql_serv)         &&
-        $conexao->query($sql_endereco)     &&
-        $conexao->query($sql_email)        &&
-        $conexao->query($sql_usuario)    ) {
+    if ($conexao->query($sql_usuario)       &&
+        $conexao->query($sql_serv)          &&
+        $conexao->query($sql_endereco)      &&
+        $conexao->query($sql_email)         && 
+        $conexao->query($sql_adolescente)   &&
+        $conexao->query($sql_idoso)         &&
+        $conexao->query($sql_especiais)     &&
+        $conexao->query($sql_crianca)       &&
+        $conexao->query($sql_bebe)    ) {
         
         $_SESSION['sucesso_cadastro'] = TRUE;
         header('Location: cadastro_profissionais_front.php');

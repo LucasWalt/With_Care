@@ -17,9 +17,29 @@
             <a class="nav-link active ms-5" aria-current="page" href="contato.php">Contato</a>
           </li>
         </ul>
+          <?php
+          Error_reporting (0);
+          if ((!$_SESSION['usuario_logado'])){
+          ?>
             <a href="login_front.php"><button class="btn btn-primary me-5 btn-lg">Entrar</button></a>
 
             <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
+          <?php
+          }else{
+          ?>
+          <div class="dropdown me-5 dropstart">
+            <i class="far fa-user-circle fs-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+              <ul class="dropdown-menu fs-4 p-4 border rounded-3" style="box-shadow: 0px 0px 1px 1px #D7D7D7" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item text-primary" href="perfil_profissional.php"><i class="fas fa-user-cog"></i> Perfil</a></li>
+                <li><a class="dropdown-item text-success  mt-3" href="#"><i class="fas fa-angle-double-up "></i> Dar boost</a></li>
+                <li><a class="dropdown-item text-danger mt-3" href="logout.php"><i class="fas fa-life-ring"></i> Ajuda</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item text-danger mt-3" href="logout.php"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+              </ul>
+          </div>
+          <?php
+          };
+          ?>
       </div>
     </div>
   </nav>
