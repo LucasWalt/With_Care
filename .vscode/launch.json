@@ -16,7 +16,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "pwa-chrome",
-            "url": "http://localhost/TCC/cadastro_profissionais_front.php",
+            "url": "http://localhost/TCC/with_care/perfil_profissional.php",
             "webRoot": "${workspaceFolder}"
         }
     ]

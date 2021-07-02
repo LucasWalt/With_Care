@@ -82,29 +82,41 @@
                                 <input type="text" class="form-control" id="nome" name="nome" placeholder="" value=""
                                     autofocus data-required>
                             </div>
+                            
                             <div class="col-sm-6">
                                 <label for="lastName" class="form-label">Sobrenome</label>
                                 <input type="text" class="form-control" id="sobrenome" name="sobrenome" placeholder=""
                                     value="" data-required>
                             </div>
+
                             <div class="col-12">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="email" name="email"
                                     placeholder="nome@exemplo.com" data-email-validate data-required>
                             </div>
-                            <div class="col-6">
-                                <label for="cpf" class="form-label">CPF</label>
-                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00"
-                                    maxlength="11" data-required>
-                            </div>
+
                             <div class="col-md-6">
                                 <label for="zip" class="form-label">CEP</label>
                                 <input type="text" class="form-control" id="zip" name="cep" placeholder="0000-0000"
                                     maxlength="8" data-required>
                             </div>
+
+                            <div class="col-6">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" name="telefone" placeholder="(00) 00000-0000"
+                                    maxlength="11" data-required>
+                            </div>
+
+                            <div class="col-6">
+                                <label for="cpf" class="form-label">CPF</label>
+                                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00"
+                                    maxlength="11" data-required>
+                            </div>
+
                             <div>
                                 <a href="" class="ms-1">É uma pessoa jurídica?</a>
                             </div>
+
                             <div class="col-md-6 ms-1">
                                 <label for="cuidado" class="form-label">De quem você cuida?</label><br>
 
@@ -122,17 +134,23 @@
 
                                 <input class="ms-3" type="checkbox" id="cuida_especiais" name="cuida_especiais">
                                 <label for="cuida_especiais"> Pessoas Especiais</label><br>
-
                             </div>
+
                             <div class="col-sm-6 me-1">
                                 <label for="senha" class="form-label">Senha</label>
                                 <input type="password" class="form-control" id="senha" name="senha" placeholder=""
                                     value="" data-password-validate data-required>
                             </div>
+
                             <div class="col-sm-6">
                                 <label for="confirma_senha" class="form-label">Confirme a Senha</label>
                                 <input type="password" class="form-control" id="confirma_senha" name="confirma_senha"
                                     placeholder="" value="" data-equal="senha" data-required>
+                            </div>
+      
+                            <div class="col-sm-8">
+                                <label class="form-label">Escolha uma imagem para seu perfil:</label><br>
+                                <input type="file" class="form-control" name="fileToUpload" id="fileToUpload" required>
                             </div>
 
                             <p class="mt-5 mb-3" style="text-align: justify; width: 450px;"><input type="checkbox"

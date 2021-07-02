@@ -2,16 +2,15 @@
   session_start();
   include('conexao.php');
 
-  $id_pagina = (isset($_GET['id']))? $_GET['id'] : 1;
+  $cpf_usuario_logado = $_SESSION['usuario_logado'];
 
   $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, B.cep, C.email_1, D.telefone_1, D.telefone_2,
-               E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
-               INNER JOIN endereco as B on A.id_usuario = B.id_usuario
-               INNER JOIN email as C on A.id_usuario = C.id_usuario 
-               INNER JOIN telefone as D on A.id_usuario = D.id_usuario 
-               INNER JOIN servico as E on A.id_usuario = E.id_usuario  
-               INNER JOIN pontuacao_avaliacao as F on A.id_usuario = F.id_avaliado
-               WHERE A.id_usuario = '$id_pagina'";
+                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais FROM usuario as A 
+                INNER JOIN endereco as B on A.id_usuario = B.id_usuario
+                INNER JOIN email as C on A.id_usuario = C.id_usuario 
+                INNER JOIN telefone as D on A.id_usuario = D.id_usuario 
+                INNER JOIN servico as E on A.id_usuario = E.id_usuario  
+                WHERE A.cpf = '$cpf_usuario_logado'";
 
 $execute = mysqli_query($conexao,$sql_code);
 
@@ -71,12 +70,12 @@ $usuario = $execute->fetch_assoc();
 
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
-    <link href="css/avaliacao.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 <?php
 include('layouts/menu_principal.php');
+include('layouts/star_system.php');
 ?>
 
 <main>
@@ -90,35 +89,19 @@ include('layouts/menu_principal.php');
   </div>
   </a>
 
-  <img src="imagens/logo.png"  class="rounded-circle mt-2 foto_perfil mb-5" alt="">
+  <img src="imagens/logo.png"  class="rounded-circle mt-2 foto_perfil" alt="">
   <br>
-  <?php 
- //while($usuario = $execute->fetch_assoc()){
-		$calculo = ($usuario['qt_pontos'] == 0) ? 0 : round(($usuario['qt_pontos']/$usuario['qt_votos']), 1);
-  ?>
-  <span class="ratingAverage" data-average="<?php echo $calculo;?>"></span>
-  <span class="article" data-id="<?php echo $usuario['id_avaliado'];?>"></span>
-    
-  <div class="barra">
-  	<span class="bg"></span>
-  	<span class="stars">
-  <?php for($i=1; $i<=5; $i++):?>
-  
-  
-  <span class="star" data-vote="<?php echo $i;?>">
-  	<span class="starAbsolute"></span>
-  </span>
-  <?php 
-  	endfor;
-  	echo '</span></div><p class="votos"><span>'.$usuario['qt_votos'].'</span> votos</p>';
- // }
-  ?>
+
+  <div class="d-inline-flex mt-3"> 
+  <svg class="icon">
+	<use xlink:href="#stars-5-0-star">
+	</svg></div>
 
   <h3 class="mt-2"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
   <h5 class="pt-3"><?= $usuario['cep'] ?></h5>
 
-  <p class="pt-4"><?= isset($usuario['descricao']) ?></p>
+  <p class="pt-4"><?= $usuario['descricao'] ?></p>
 
   <br>
   <h5>Cuido de...</h5>
@@ -166,7 +149,7 @@ include('layouts/menu_principal.php');
 
   <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fab fa-whatsapp align-middle" style="font-size: 35px;"></i> <?= $usuario['telefone_1'] ?></p>
 
-  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-phone-alt align-middle" style="font-size: 30px;"></i> <?= isset($usuario['telefone_2']); ?></p>
+  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-phone-alt align-middle" style="font-size: 30px;"></i> <?= $usuario['telefone_2'] ?></p>
  
   <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-at align-middle" style="font-size: 33px;"></i> <?= $usuario['email_1'] ?></p>
   </div>
@@ -179,6 +162,4 @@ include('layouts/rodape.php');
 ?>
 </body>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/avaliations.js"></script>
 </html>

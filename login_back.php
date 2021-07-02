@@ -20,6 +20,8 @@
 
     if ($row == 1) {
         $_SESSION['usuario_logado'] = $dados_usuario['cpf'];
+        $_SESSION['nome_usuario'] = $dados_usuario['nome'];
+        $_SESSION['id_usuario'] = $dados_usuario['id_usuario'];
         header('Location: verifica_login.php');
         exit();
     }else{
