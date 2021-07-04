@@ -178,6 +178,8 @@ include('layouts/menu_principal.php');
 include('layouts/rodape.php');
 ?>
 </body>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/avaliations.js"></script>

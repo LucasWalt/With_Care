@@ -18,7 +18,7 @@
           </li>
         </ul>
           <?php
-         // Error_reporting (0);
+
           if (isset($_SESSION['usuario_logado'])){
           ?>
           <div class="dropdown me-5 dropstart">
@@ -34,13 +34,25 @@
           </div>
           <?php
           }else{
+            $pg = "$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            if (($pg == "localhost/TCC/With_Care/cadastro_clientes_front.php") 
+            || ($pg == "localhost/TCC/With_Care/cadastro_profissinais_front.php")){
+          ?>
+            <a href="login_front.php"><button class="btn btn-primary me-5 btn-lg">Entrar</button></a>            
+          <?php
+            }elseif ($pg == "localhost/TCC/With_Care/login_front.php") {
+          ?>
+            <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
+          <?php
+            }else{
           ?>
             <a href="login_front.php"><button class="btn btn-primary me-5 btn-lg">Entrar</button></a>
             <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
-          </div>
           <?php
+            }
           };
           ?>
+          </div>
       </div>
     </div>
   </nav>

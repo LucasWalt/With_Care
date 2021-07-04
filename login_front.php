@@ -81,6 +81,7 @@
     <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
   </form>
 </main>
-
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
   </body>
 </html>

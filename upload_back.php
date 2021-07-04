@@ -1,6 +1,13 @@
 <?php
     session_start();
     include('conexao.php');
+
+    if (isset($_SESSION['usuario_logado'])){
+
+    }else{
+      header('Location: index.php');
+    };
+
     $target_dir = "imagens/pic_usuarios/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
     $uploadOk = 1;

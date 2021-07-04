@@ -148,11 +148,6 @@
                                     placeholder="" value="" data-equal="senha" data-required>
                             </div>
       
-                            <div class="col-sm-8">
-                                <label class="form-label">Escolha uma imagem para seu perfil:</label><br>
-                                <input type="file" class="form-control" name="fileToUpload" id="fileToUpload" required>
-                            </div>
-
                             <p class="mt-5 mb-3" style="text-align: justify; width: 450px;"><input type="checkbox"
                                     id="aceita_termos" name="aceita_termos" value="">
                                 Aceito os <a href="">Termos e condições</a> e autorizo o uso de meus dados de acordo
@@ -169,10 +164,8 @@
     <?php
         include('layouts/rodape.php');
     ?>
-    <!-- <p class="error-validation" style="color: red;"></p> -->
-
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="js\validacao_cadastro.js"></script> -->
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
