@@ -13,6 +13,7 @@
 
     <link rel="canonical" href="https://etbootstrap.com/docs/5.0/examples/sign-in/">
     
+    <link rel="icon" type="image/jpg" href="imagens/logo.png" />   
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -50,12 +51,12 @@
     <h1 class="h3 mb-3 fw-normal">Entre na sua conta agora!</h1>
     
     <div class="form-floating">
-      <input type="text" class="form-control"  id="floatingInput" name="cpf" placeholder="CPF" maxlength ="11">
+      <input type="text" class="form-control"  id="floatingInput" name="cpf" placeholder="CPF" maxlength ="11" autofocus required>
       <label for="floatingInput">CPF</label>
     </div>
     
     <div class="form-floating">
-      <input type="password" class="form-control des" name="senha" id="floatingPassword" placeholder="Senha">
+      <input type="password" class="form-control des" name="senha" id="floatingPassword" placeholder="Senha" required>
       <label for="floatingPassword">Senha</label>
     </div>
     
@@ -78,8 +79,11 @@
 
     </div>
     <button class="w-100 btn btn-lg btn-primary" type="submit">Entrar</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
+
   </form>
+  <?php
+  include('layouts/rodape.php');
+?>
 </main>
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>

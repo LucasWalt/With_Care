@@ -1,4 +1,4 @@
-.barra{width:150px; height:30px; background:#ebebeb; position:relative;}
+.barra{width:150px; height:30px; background-color: #F7F7F7; position:relative;}
 .stars{position:absolute; left:0; top:0; width:100%;}
 .star{
 	float:left; 

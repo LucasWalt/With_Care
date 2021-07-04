@@ -4,7 +4,7 @@
 
 
     //Define o numero de perfis de profissionais iram aparecer por pagina.
-    $perfis_por_pagina = 3;
+    $perfis_por_pagina = 6;
 
     //Pegar pagina atual 
     $pagina = (isset($_GET['pagina']))? $_GET['pagina'] : 1;
@@ -13,7 +13,7 @@
     $inicio=$pagina*$perfis_por_pagina - $perfis_por_pagina;
 
     //Pegar usuarios do tipo "P"(profissional) do banco de dados 
-    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, B.cep FROM usuario as A 
+    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, A.dir_foto_perfil, B.cep FROM usuario as A 
                  INNER JOIN endereco as B on A.id_usuario = B.id_usuario 
                  WHERE A.tp_usuario = 'P' LIMIT $inicio, $perfis_por_pagina;";
 
@@ -56,6 +56,10 @@
     a{
         text-decoration: none;
         color: #000;
+    }
+    .foto_perfil{
+      width: 150px;
+      height: 150px;
     }
     .bd-placeholder-img {
         font-size: 1.125rem;
@@ -129,13 +133,18 @@
                 <div class="feature col border border-1 text-center rounded-5 m-3">
                     <a href="perfil_profissional.php?id=<?= $usuario['id_usuario']?>">
 
-                        <div class="feature-icon bg-gradient border border-2 mt-5">
-                        </div>
+                    <img src="<?php  if ($usuario['dir_foto_perfil']){
+                      if ($usuario['dir_foto_perfil'] != "") {
+                         echo $usuario['dir_foto_perfil'];
+                      }
+                    }else{
+                        echo "imagens/pic_usuarios/semfoto.png";
+                    } ?>"  class="rounded-circle mt-2 foto_perfil border border-2 border-secondary" alt="">
                         <h2><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome']?></h2>
 
-                        <p><?= $usuario['descricao']?></p>
+                        <p class="text-truncate ms-5 me-5"><?= $usuario['descricao']?></p>
 
-                        <p>Entre em Contato</p>
+                        <p>Mais informações <i class="fas fa-angle-right"></i></p>
                     </a>
                 </div>
                 <?php }while($usuario = $execute->fetch_assoc()); }?>

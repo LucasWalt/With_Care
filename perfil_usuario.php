@@ -11,11 +11,12 @@
   $cpf_usuario_logado = $_SESSION['usuario_logado'];
 
   $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, A.tp_usuario, B.cep, C.email_1, D.telefone_1, D.telefone_2,
-                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais FROM usuario as A 
+                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
                 INNER JOIN endereco as B on A.id_usuario = B.id_usuario
                 INNER JOIN email as C on A.id_usuario = C.id_usuario 
                 INNER JOIN telefone as D on A.id_usuario = D.id_usuario 
-                INNER JOIN servico as E on A.id_usuario = E.id_usuario  
+                INNER JOIN servico as E on A.id_usuario = E.id_usuario 
+                INNER JOIN pontuacao_avaliacao as F on A.id_usuario = F.id_avaliado 
                 WHERE A.cpf = '$cpf_usuario_logado'";
 
 $execute = mysqli_query($conexao,$sql_code);
@@ -23,6 +24,8 @@ $execute = mysqli_query($conexao,$sql_code);
 $usuario = $execute->fetch_assoc();
 
 include('API_pesquisa_cep.php');
+
+$btn_salvar = "False";
 ?>
 <!doctype html>
 <html lang="en">
@@ -33,10 +36,10 @@ include('API_pesquisa_cep.php');
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>With Care | Profissionais Próximos</title>
+    <title>With Care | Perfil do Usuário</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
-
+    <link rel="icon" type="image/jpg" href="imagens/logo.png" />   
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
@@ -78,6 +81,7 @@ include('API_pesquisa_cep.php');
 
     <!-- Custom styles for this template -->
     <link href="css/carousel.css" rel="stylesheet">
+    <link href="css/avaliacao.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -87,7 +91,8 @@ include('layouts/menu_principal.php');
 
 <main>
   <div class="container mt-5 py-5">
-  <div class="container-md border-4 p-5" style="background-color: #F7F7F7; border-radius: 10px; box-shadow: 1px 1px 5px 5px #EEEEEE;">
+  <div class="container-md border-4 p-5" style="background-color: #F7F7F7; 
+    border-radius: 10px; box-shadow: 1px 1px 5px 5px #EEEEEE;">
   
   <a href="editar_info_usuario_front.php">
   <div class="float-end align-middle btn btn-primary">
@@ -102,13 +107,61 @@ include('layouts/menu_principal.php');
                       }
                     }else{
                         echo "imagens/pic_usuarios/semfoto.png";
-                    } ?>"  class="rounded-circle mt-2 foto_perfil border border-2 border-secondary" alt="">
-<i class="fas fa-user-edit rounded-circle border border-2 fs-5 p-4 position-absolute" style="color: #fff; background-color: #3A97DE; margin-top: 10.5%; margin-right: 17.5%;"></i>
-</div>
+                    } ?>"  class="rounded-circle mt-2 mb-3 foto_perfil border border-2 border-secondary">
+
+  <?php
+      
+      // Mensagem cadastrado com sucesso
+
+        if (isset($_SESSION['foto_salva'])){
+      ?>
+            <div class="alert alert-success d-inline-block" role="alert">
+                Sucesso ao atualizar foto de perfil!
+            </div>
+      <?php
+        }
+        
+        if (isset($_SESSION['foto_erro'])){
+      ?>
+            <div class="alert alert-danger d-inline-block" role="alert">
+              Erro ao atualizar foto de perfil!
+            </div>
+      <?php          
+        };
+        unset($_SESSION['foto_salva']);
+        unset($_SESSION['foto_erro']);
+  ?>
+
+  <?php 
+		$calculo = ($usuario['qt_pontos'] == 0) ? 0 : round(($usuario['qt_pontos']/$usuario['qt_votos']), 1);
+  ?>
+  <span class="ratingAverage" data-average="<?php echo $calculo;?>"></span>
+  <span class="article" data-id="<?php echo $usuario['id_avaliado'];?>"></span>
+    
+  <div class="barra" style="margin-left: 4%;">
+  	<span class="bg"></span>
+  	<span class="stars">
+  <?php for($i=1; $i<=5; $i++):?>
+  
+  
+  <span class="star" data-vote="<?php echo $i;?>">
+  	<span class="starAbsolute"></span>
+  </span>
+  <?php 
+  	endfor;
+  	echo '</span></div><p class="votos" style="margin-left: 9.5%;">(<span>'.$usuario['qt_votos'].'</span>)</p>';
+  ?>
+
   <br>
+  <div class="bg-secondary pb-2 pt-1 ps-1 pe-1 border border-3 rounded-3 border-secondary d-inline-block">
+    <form action="upload_back.php" method="post" enctype="multipart/form-data">
+      <input class="float-start align-middle btn ps-1" style="background-color: #D2D2D2; width: 141px;" type="file"  name="fileToUpload">
+      <button class=" btn btn-primary align-middle ms-2 border border-1 rounded-3" style="margin-top: 2.7px;" type="submit"
+       id="btn-submit" name="submit" id="fileToUpload">Salvar</button>
+    </form>
+  </div>
 
-
-  <h3 class="mt-2"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
+  <h3 class="mt-5"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
   <h5 class="pt-3"><?php echo $endereco->localidade; ?> - <?php echo $endereco->uf; ?></h5>
 
@@ -186,5 +239,7 @@ include('layouts/rodape.php');
 
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/avaliations.js"></script>
 </body>
 </html>

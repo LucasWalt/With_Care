@@ -10,6 +10,8 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/heroes/">
 
+    <link rel="icon" type="image/jpg" href="imagens/logo.png" />   
+
     <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 

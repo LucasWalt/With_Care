@@ -4,7 +4,7 @@
 
   $id_pagina = (isset($_GET['id']))? $_GET['id'] : 1;
 
-  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, B.cep, C.email_1, D.telefone_1, D.telefone_2,
+  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, B.cep, C.email_1, D.telefone_1, D.telefone_2,
                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
                INNER JOIN endereco as B on A.id_usuario = B.id_usuario
                INNER JOIN email as C on A.id_usuario = C.id_usuario 
@@ -90,7 +90,13 @@ include('layouts/menu_principal.php');
   </div>
   </a>
 
-  <img src="imagens/logo.png"  class="rounded-circle mt-2 foto_perfil mb-5" alt="">
+  <img src="<?php  if ($usuario['dir_foto_perfil']){
+                      if ($usuario['dir_foto_perfil'] != "") {
+                         echo $usuario['dir_foto_perfil'];
+                      }
+                    }else{
+                        echo "imagens/pic_usuarios/semfoto.png";
+                    } ?>"  class="rounded-circle mt-2 mb-3 foto_perfil border border-2 border-secondary">
   <br>
   <?php 
  //while($usuario = $execute->fetch_assoc()){
@@ -179,7 +185,6 @@ include('layouts/rodape.php');
 ?>
 </body>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/d166a195c7.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/avaliations.js"></script>

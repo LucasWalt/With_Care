@@ -18,13 +18,25 @@
           </li>
         </ul>
           <?php
-
-          if (isset($_SESSION['usuario_logado'])){
+            if (isset($_SESSION['usuario_logado'])){
           ?>
           <div class="dropdown me-5 dropstart">
+          <?php 
+            if (isset($_SESSION['dir_foto_perfil'])){ 
+          ?>
+            <img src="<?php echo $_SESSION['dir_foto_perfil']; ?>" alt="" 
+             class="rounded-circle mt-2 foto_perfil border border-2 border-secondary"
+             id="dropdownMenuButton1" data-bs-toggle="dropdown" 
+             aria-expanded="false" style="width: 65px; height: 65px;">
+          <?php
+            }else{
+          ?>
             <i class="far fa-user-circle fs-1" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"></i>
+          <?php 
+            }
+          ?>
               <ul class="dropdown-menu fs-4 p-4 border rounded-3" style="box-shadow: 0px 0px 1px 1px #D7D7D7" aria-labelledby="dropdownMenuButton1">
-                <li><i class=""></i> Olá, <?= $_SESSION['nome_usuario']?>!</li>
+                <li><i class=""></i> Olá, <?= $_SESSION['nome_usuario'] ?>!</li>
                 <li><a class="dropdown-item text-primary mt-5" href="perfil_usuario.php"><i class="fas fa-user-cog"></i> Perfil</a></li>
                 <li><a class="dropdown-item text-success  mt-3" href="#"><i class="fas fa-angle-double-up "></i> Dar boost</a></li>
                 <li><a class="dropdown-item text-danger mt-3" href="logout.php"><i class="fas fa-life-ring"></i> Ajuda</a></li>

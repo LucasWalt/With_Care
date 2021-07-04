@@ -10,11 +10,11 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>Cadastro | With Care</title>
+    <title>With Care | Cadastro</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
-
+    <link rel="icon" type="image/jpg" href="imagens/logo.png" />   
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">

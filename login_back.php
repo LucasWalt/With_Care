@@ -10,7 +10,7 @@
     $cpf =   mysqli_real_escape_string($conexao, $_POST['cpf']);
     $senha = mysqli_real_escape_string($conexao, $_POST['senha']);
 
-    $query = "select id_usuario, cpf, nome from usuario where cpf = '$cpf' and senha = md5('$senha')";
+    $query = "select id_usuario, cpf, dir_foto_perfil, nome from usuario where cpf = '$cpf' and senha = md5('$senha')";
 
     $result = mysqli_query($conexao, $query);
 
@@ -22,6 +22,7 @@
         $_SESSION['usuario_logado'] = $dados_usuario['cpf'];
         $_SESSION['nome_usuario'] = $dados_usuario['nome'];
         $_SESSION['id_usuario'] = $dados_usuario['id_usuario'];
+        $_SESSION['dir_foto_perfil'] = $dados_usuario['dir_foto_perfil'];
         header('Location: verifica_login.php');
         exit();
     }else{
