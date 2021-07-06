@@ -109,7 +109,7 @@
             <p>
                 <a class="btn" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
                     aria-controls="collapseExample" >
-                    <i class="fas fa-filter" ></i>
+                    <i class="fas fa-filter fs-5">  &emsp;Filtros</i>
                 </a>
             </p>
             <div class="collapse " id="collapseExample">

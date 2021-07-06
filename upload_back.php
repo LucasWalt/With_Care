@@ -29,7 +29,7 @@
     }
 
     // Verifica o tamanho da imagem
-    if ($_FILES["fileToUpload"]["size"] > 200000000) {
+    if ($_FILES["fileToUpload"]["size"] > 10000) {
       $uploadOk = 0;
     }
 
