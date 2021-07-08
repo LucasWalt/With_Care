@@ -70,7 +70,7 @@
 
 <main>
 
-<h1 class="text-center m-5 p-5 text-muted">Profissionais em Destaque</h1>
+<h1 class="text-center m-5 p-5 featurette-heading">Profissionais em Destaque <span class="text-muted"></span></h1>
 <div class="container marketing">
     <div class="row g-5 py-5 row-cols-5 row-cols-lg-4" style="margin-left: 12.5%;" >
   <?php do{ ?>

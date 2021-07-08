@@ -152,8 +152,10 @@ include('layouts/menu_principal.php');
   	echo '</span></div><p class="votos" style="margin-left: 9.5%;">(<span>'.$usuario['qt_votos'].'</span>)</p>';
   ?>
 
+<label for="fileToUpload" class="fs-5 fw-bolder">Alterar Foto de Perfil</label>
   <br>
-  <div class="bg-secondary pb-2 pt-1 ps-1 pe-1 border border-3 rounded-3 border-secondary d-inline-block">
+  
+  <div class=" pb-2 pt-1 ps-1 pe-1 border border-3 rounded-2 d-inline-block" style="background: #D6D2C0;border-color: #B9B6AA">
     <form action="upload_back.php" method="post" enctype="multipart/form-data">
       <input class="float-start align-middle btn ps-1" style="background-color: #D2D2D2; width: 141px;" type="file"  name="fileToUpload">
       <button class=" btn btn-primary align-middle ms-2 border border-1 rounded-3" style="margin-top: 2.7px;" type="submit"
