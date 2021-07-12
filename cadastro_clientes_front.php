@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>With Care | Cadastro</title>
+    <title>Cadastro | With Care</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/checkout/">
 
@@ -124,7 +124,6 @@
                                 maxlength="11" required>
                         </div>
                         <div>
-                            <a href="" class="ms-1">É uma pessoa jurídica?</a>
                         </div>
                         <div class="col-md-6 pb-3">
                             <label for="zip" class="form-label">CEP</label>

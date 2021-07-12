@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>WithCare | Sobre</title>
+    <title>Sobre | With Care</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/heroes/">
 
@@ -72,7 +72,7 @@
     <div class="col-lg-6 mx-auto">
       <p class="lead mb-4">Clique no botão "Cadastrar" abaixo, você será redirecinado para a página de cadastros. Logo no ínicio terá a opção de cadastro como profissional ou como cliente, escolha a primeira opção, preecnha seus dados e pronto, simples assim.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-        <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg w-100 mb-5">Cadastre-se agora!</button></a>
+        <a href="cadastro_profissionais_front.php"><button class="btn btn-primary me-5 btn-lg w-100 mb-5">Cadastre-se agora!</button></a>
       </div>
     </div>
 </div>

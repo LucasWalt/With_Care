@@ -76,7 +76,7 @@
   <?php do{ ?>
 
 
-    <div class="feature col border border-1 text-center rounded-5 m-4">
+    <div class="feature col border border-1 text-center rounded-5 m-3">
         <a href="perfil_profissional.php?id=<?= $usuario['id_usuario']?>">
         <img src="<?php  if ($usuario['dir_foto_perfil']){
           if ($usuario['dir_foto_perfil'] != "") {
@@ -85,9 +85,50 @@
         }else{
             echo "imagens/pic_usuarios/semfoto.png";
         } ?>"  class="rounded-circle mt-5 mb-4 foto_perfil border border-2 border-secondary" alt="">
-            <h2><?= $usuario['nome'] ?></h2>
+            <h2><?=  $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h2>
+
+
+            <h5 class="mt-3">Cuido de...</h5>
+  <div class="mt-3 d-inline-block" style="">
+  <?php
+      if ($usuario['especiais'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #CD03FF;">
+      Especiais
+    </div>
+  <?php
+      endif;
+      if ($usuario['criancas'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-dark d-inline-block border border-dark" style="background-color: #F3F76C;">
+      Crianças
+    </div>
+  <?php
+      endif;
+      if ($usuario['adolescentes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #FF4561;">
+      Adolescentes
+    </div>
+  <?php
+      endif;
+      if ($usuario['idosos'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #FFAF03;">
+      Idosos
+    </div>
+  <?php
+      endif;
+      if ($usuario['bebes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #40C5EB;">
+      Bebês
+    </div>
+  <?php
+      endif;
+  ?> 
+  </div>
       
-            <p class="text-truncate ms-5 me-5"><?= $usuario['descricao']?></p>
       
             <p class="m-3">Mais informações <i class="fas fa-angle-right"></i></p>
         </a>
@@ -110,7 +151,7 @@
         <p class="lead">Todos precisamos em algum momento de alguém para cuidar de quem nós amamos, e por que não fazer isso de forma agil e prática? .</p>
       </div>
       <div class="col-md-5">
-        <img src="imagens/maeefilha.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500">
+        <img src="imagens/maeefilha.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto border border-1  " width="500" height="500">
       </div>
     </div>
 
@@ -122,7 +163,7 @@
         <p class="lead">Você pode ver informações detalhadas de cada cuidador e observar as avaliações dadas a eles.</p>
       </div>
       <div class="col-md-5 order-md-1">
-      <img src="imagens/cuidadordeidosos.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500">
+      <img src="imagens/cuidadordeidosos.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto border border-1" width="500" height="500">
 
       </div>
     </div>
@@ -135,7 +176,7 @@
         <p class="lead">Ache os cuidadores mais próximos de você, fazendo buscas através da sua localização.</p>
       </div>
       <div class="col-md-5">
-      <img src="imagens/cuidadorespeciais.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500">
+      <img src="imagens/cuidadorespeciais.png" alt="" class="rounded-3 bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto border border-1" width="500" height="500">
 
       </div>
     </div>

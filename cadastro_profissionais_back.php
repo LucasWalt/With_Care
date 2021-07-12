@@ -37,13 +37,15 @@
         exit;
     }
 
+    include('geo_ip.php');
+
     // Insere os dados na base. 
 
     //Tabelas "usuario", "email" e "endereco".
     
     $sql_usuario = "INSERT INTO usuario (nome, sobrenome, cpf, senha, dt_cadastro, tp_usuario) values('$nome', '$sobrenome','$cpf','$senha', NOW(), 'P')";
     $sql_email = "INSERT INTO email(id_usuario, email_1) values((select id_usuario from usuario where cpf = '$cpf'), '$email')";
-    $sql_endereco = "INSERT INTO endereco(id_usuario, cep) values((select id_usuario from usuario where cpf = '$cpf'), '$cep')";
+    $sql_endereco = "INSERT INTO endereco(id_usuario, cep , latitude, longitude) values((select id_usuario from usuario where cpf = '$cpf'), '$cep', $data->latitude, $data->longitude);";
     $sql_telefone = "INSERT INTO telefone(id_usuario, telefone_1) values((select id_usuario from usuario where cpf = '$cpf'), '$telefone')";
     
     //Tabela "servico".

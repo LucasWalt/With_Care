@@ -36,7 +36,7 @@ $btn_salvar = "False";
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>With Care | Perfil do Usuário</title>
+    <title>Perfil do Usuário | With Care</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
     <link rel="icon" type="image/jpg" href="imagens/logo.png" />   

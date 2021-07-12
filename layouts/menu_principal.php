@@ -8,13 +8,13 @@
       <div class="collapse navbar-collapse ms-5" id="navbarCollapse">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active ms-5" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link active ms-5" style="color: #313739;" aria-current="page" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active ms-5" aria-current="page" href="sobre.php">Sobre</a>
+            <a class="nav-link active ms-5" style="color: #313739;" aria-current="page" href="sobre.php">Sobre</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active ms-5" aria-current="page" href="contato.php">Contato</a>
+            <a class="nav-link active ms-5" style=" color: #313739;" aria-current="page" href="quadro_profissionais.php">Profissionais</a>
           </li>
         </ul>
           <?php
@@ -59,7 +59,7 @@
             }else{
           ?>
             <a href="login_front.php"><button class="btn btn-primary me-5 btn-lg">Entrar</button></a>
-            <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
+            <a href="tipo_usuario_cadastro.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
           <?php
             }
           };

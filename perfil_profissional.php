@@ -26,7 +26,7 @@ $usuario = $execute->fetch_assoc();
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>With Care | Profissionais Próximos</title>
+    <title>Profissionais Próximos | With Care</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
 
@@ -99,7 +99,6 @@ include('layouts/menu_principal.php');
                     } ?>"  class="rounded-circle mt-2 mb-3 foto_perfil border border-2 border-secondary">
   <br>
   <?php 
- //while($usuario = $execute->fetch_assoc()){
 		$calculo = ($usuario['qt_pontos'] == 0) ? 0 : round(($usuario['qt_pontos']/$usuario['qt_votos']), 1);
   ?>
   <span class="ratingAverage" data-average="<?php echo $calculo;?>"></span>
@@ -117,14 +116,11 @@ include('layouts/menu_principal.php');
   <?php 
   	endfor;
   	echo '</span></div><p class="votos"><span>'.$usuario['qt_votos'].'</span> votos</p>';
- // }
   ?>
 
   <h3 class="mt-2"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
   <h5 class="pt-3"><?= $usuario['cep'] ?></h5>
-
-  <p class="pt-4"><?= isset($usuario['descricao']) ?></p>
 
   <br>
   <h5>Cuido de...</h5>
@@ -167,12 +163,12 @@ include('layouts/menu_principal.php');
       endif;
   ?> 
   </div>
+
+  <p class="pt-4"><?= $usuario['descricao'] ?></p>
  
   <hr class="mt-5 mb-5">
 
   <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fab fa-whatsapp align-middle" style="font-size: 35px;"></i> <?= $usuario['telefone_1'] ?></p>
-
-  <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-phone-alt align-middle" style="font-size: 30px;"></i> <?= isset($usuario['telefone_2']); ?></p>
  
   <p class="pt-2 ps-2 pe-2 rounded-3"><i class="fas fa-at align-middle" style="font-size: 33px;"></i> <?= $usuario['email_1'] ?></p>
   </div>

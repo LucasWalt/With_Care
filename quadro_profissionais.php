@@ -11,10 +11,23 @@
 
 
     $inicio=$pagina*$perfis_por_pagina - $perfis_por_pagina;
+    
+    include('geo_ip.php');
 
     //Pegar usuarios do tipo "P"(profissional) do banco de dados 
-    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, A.dir_foto_perfil, B.cep FROM usuario as A 
-                 INNER JOIN endereco as B on A.id_usuario = B.id_usuario 
+    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, A.dir_foto_perfil,
+                 E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 3959 * acos( cos( radians(
+                 -- latitude
+                 $data->latitude) ) * cos( radians( 
+                 B.latitude ) ) * cos( radians( 
+                 B.longitude ) - radians(
+                 -- longitude
+                 $data->longitude) ) + sin( radians(
+                 -- latitude
+                 $data->latitude) ) * sin( radians( 
+                 B.latitude ) ) ) ) AS distancia FROM usuario AS A 
+                 INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
+                 INNER JOIN servico as E on A.id_usuario = E.id_usuario 
                  WHERE A.tp_usuario = 'P' LIMIT $inicio, $perfis_por_pagina;";
 
     $execute = mysqli_query($conexao,$sql_code);
@@ -39,7 +52,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.83.1">
-    <title>Profissionais Proximos</title>
+    <title>Profissionais Proximos | With Care</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/carousel/">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/features/">
@@ -129,7 +142,7 @@
             if ($num > 0) {
                 do{
             ?>
-
+            
                 <div class="feature col border border-1 text-center rounded-5 m-3">
                     <a href="perfil_profissional.php?id=<?= $usuario['id_usuario']?>">
 
@@ -142,7 +155,51 @@
                     } ?>"  class="rounded-circle mt-2 foto_perfil border border-2 border-secondary" alt="">
                         <h2><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome']?></h2>
 
-                        <p class="text-truncate ms-5 me-5"><?= $usuario['descricao']?></p>
+
+                        <h5 class="mt-3">Cuido de...</h5>
+  <div class="mt-3 d-inline-block" style="width: 300px">
+  <?php
+      if ($usuario['especiais'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #CD03FF;">
+      Especiais
+    </div>
+  <?php
+      endif;
+      if ($usuario['criancas'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-dark d-inline-block border border-dark" style="background-color: #F3F76C;">
+      Crianças
+    </div>
+  <?php
+      endif;
+      if ($usuario['adolescentes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #FF4561;">
+      Adolescentes
+    </div>
+  <?php
+      endif;
+      if ($usuario['idosos'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #FFAF03;">
+      Idosos
+    </div>
+  <?php
+      endif;
+      if ($usuario['bebes'] == 1):
+  ?>
+    <div class="rounded-pill p-2 mb-2 text-white d-inline-block border border-dark" style="background-color: #40C5EB;">
+      Bebês
+    </div>
+  <?php
+      endif;
+  ?> 
+  </div>
+
+
+                        <br>
+                        <p class="text-truncate ms-5 me-5">Distancia <?= number_format($usuario['distancia'],2);?> KM</p>
 
                         <p>Mais informações <i class="fas fa-angle-right"></i></p>
                     </a>
