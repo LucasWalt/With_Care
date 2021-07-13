@@ -50,20 +50,6 @@
             <div class=" py-5 col-md-7 col-lg-6">
                 <h3 class="mb-5 mt-2">Cadastre-se agora e encontre os melhores profissionais da sua região!</h3>
                 <?php
-      
-      // Mensagem cadastrado com sucesso
-
-        if (isset($_SESSION['sucesso_cadastro'])):
-      ?>
-                <div class="alert alert-success" role="alert">
-                    Você foi cadastrado com sucesso!
-                </div>
-                <?php
-        endif;
-        unset($_SESSION['sucesso_cadastro']);
-
-      //-->
-
       //<-- Mensagem de erro ao cadastrar
 
         if (isset($_SESSION['falha_cadastro'])):  
@@ -99,7 +85,27 @@
       endif;
       unset($_SESSION['email_existe']);
       //-->
-      ?>
+      if (isset($_SESSION['senha_difere'])) :
+        ?>
+                        <div class="alert alert-danger" role="alert">
+                      Falha ao realizar seu cadastro! <br>
+                      As <strong>senhas</strong> informadas não são identicas.
+                  </div>
+                  <?php
+        endif;
+        unset($_SESSION['senha_difere']);
+              // Mensagem cadastrado com sucesso
+
+      if (isset($_SESSION['sucesso_cadastro'])):
+        ?>
+                  <div class="alert alert-success" role="alert">
+                      Você foi cadastrado com sucesso!
+                  </div>
+                  <?php
+          endif;
+          unset($_SESSION['sucesso_cadastro']);
+                   //-->
+        ?>
                 <form action="cadastro_clientes_back.php" method="POST">
                     <div class="row g-3">
                         <div class="col-sm-6">
@@ -142,9 +148,9 @@
                         </div>
 
                         <p class="mt-5 mb-3" style="text-align: justify; width: 450px;"><input type="checkbox"
-                                id="aceita_termos" name="aceita_termos" value="">
-                            Aceito os <a href="">Termos e condições</a> e autorizo o uso de meus dados de acordo
-                            com a <a href="">Declaração de privacidade</a>.
+                                id="aceita_termos" name="aceita_termos" value="" required>
+                            Aceito os <a href="termos.php">Termos e condições</a> e autorizo o uso de meus dados de acordo
+                            com a <a href="privacidade.php">Declaração de privacidade</a>.
                         </p>
 
                         <button class="w-100 btn btn-primary btn-lg align-middle" type="submit"

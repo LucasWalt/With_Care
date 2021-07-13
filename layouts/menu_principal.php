@@ -54,7 +54,7 @@
           <?php
             }elseif ($pg == "localhost/TCC/With_Care/login_front.php") {
           ?>
-            <a href="cadastro_clientes_front.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
+            <a href="tipo_usuario_cadastro.php"><button class="btn btn-primary me-5 btn-lg">Cadastre-se</button></a>
           <?php
             }else{
           ?>

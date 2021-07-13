@@ -7,7 +7,15 @@
     $email =          mysqli_real_escape_string($conexao, trim($_POST['email']));
     $cpf =            mysqli_real_escape_string($conexao, trim($_POST['cpf']));
     $cep =            mysqli_real_escape_string($conexao, trim($_POST['cep']));
-    $senha =          mysqli_real_escape_string($conexao, trim(md5($_POST['senha'])));
+    $senha =          mysqli_real_escape_string($conexao, md5($_POST['senha']));
+    $confirma_senha = mysqli_real_escape_string($conexao, md5($_POST['confirma_senha']));
+
+    $erro = 0;
+    if ($senha != $confirma_senha) {
+        $erro = 1;
+        $_SESSION['senha_difere']   = TRUE;
+        header('Location: cadastro_profissionais_front.php');
+    }
 
 // Verifica se EMAIL e se CPF já estão cadastrados na base. 
 
@@ -16,6 +24,7 @@
     $row = mysqli_fetch_assoc($result);
 
     if ($row['total'] == 1) {
+        $erro = 1;
         $_SESSION['cpf_existe'] = TRUE;
         header('Location: cadastro_clientes_front.php');
         exit;
@@ -26,6 +35,7 @@
     $row = mysqli_fetch_assoc($result);
     
     if ($row['total'] == 1) {
+        $erro = 1;
         $_SESSION['email_existe'] = TRUE;
         header('Location: cadastro_clientes_front.php');
         exit;
@@ -41,6 +51,7 @@ include('geo_ip.php');
     $sql2 = "INSERT INTO endereco(id_usuario, cep , latitude, longitude) values((select id_usuario from usuario where cpf = '$cpf'), '$cep', $data->latitude, $data->longitude);"; 
 
 //Verifica se foram realmente inseridos.
+    if ($erro != 1) {
     if  (($conexao->query($sql))   &&
         ($conexao->query($sql1))   &&
         ($conexao->query($sql2))){
@@ -50,9 +61,6 @@ include('geo_ip.php');
     }else {
         $_SESSION['falha_cadastro'] = TRUE;
         header('Location: cadastro_clientes_front.php');
+    }}else {
     }
-
-    $conexao->close();
-
-    exit();
 ?>

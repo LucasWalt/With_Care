@@ -4,7 +4,7 @@
 
   $id_pagina = (isset($_GET['id']))? $_GET['id'] : 1;
 
-  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, B.cep, C.email_1, D.telefone_1, D.telefone_2,
+  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, B.*, C.email_1, D.telefone_1, D.telefone_2,
                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
                INNER JOIN endereco as B on A.id_usuario = B.id_usuario
                INNER JOIN email as C on A.id_usuario = C.id_usuario 
@@ -99,28 +99,31 @@ include('layouts/menu_principal.php');
                     } ?>"  class="rounded-circle mt-2 mb-3 foto_perfil border border-2 border-secondary">
   <br>
   <?php 
+  if (isset($_SESSION['usuario_logado'])) :
 		$calculo = ($usuario['qt_pontos'] == 0) ? 0 : round(($usuario['qt_pontos']/$usuario['qt_votos']), 1);
   ?>
-  <span class="ratingAverage" data-average="<?php echo $calculo;?>"></span>
-  <span class="article" data-id="<?php echo $usuario['id_avaliado'];?>"></span>
-    
-  <div class="barra">
-  	<span class="bg"></span>
-  	<span class="stars">
-  <?php for($i=1; $i<=5; $i++):?>
-  
-  
-  <span class="star" data-vote="<?php echo $i;?>">
-  	<span class="starAbsolute"></span>
-  </span>
+      <span class="ratingAverage" data-average="<?php echo $calculo;?>"></span>
+      <span class="article" data-id="<?php echo $usuario['id_avaliado'];?>"></span>
+      <div class="barra">
+      	<span class="bg"></span>
+      	<span class="stars">
+      <?php for($i=1; $i<=5; $i++):?>
+      <span class="star" data-vote="<?php echo $i;?>">
+      	<span class="starAbsolute"></span>
+      </span>
   <?php 
   	endfor;
   	echo '</span></div><p class="votos"><span>'.$usuario['qt_votos'].'</span> votos</p>';
+  endif;
   ?>
 
   <h3 class="mt-2"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
-  <h5 class="pt-3"><?= $usuario['cep'] ?></h5>
+  <h5 class="pt-3"><?php echo $usuario['cidade'] ?> - <?php echo $usuario['estado'] ?></h5>
+
+  <?php if ((isset($usuario['bairro'] )) && ($usuario['bairro']  != '')) : ?>
+    <h5 class="pt-3">Bairro <?php $usuario['bairro']  ?></h5> 
+  <?php endif;?>
 
   <br>
   <h5>Cuido de...</h5>

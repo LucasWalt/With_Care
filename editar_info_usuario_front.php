@@ -98,7 +98,27 @@ $usuario = $execute->fetch_assoc();
         endif;
         unset($_SESSION['falha_cadastro']);
       //-->
+
+
+        if (isset($_SESSION['falha_deletar'])):
+        ?>
+            <div class="alert alert-danger" role="alert">
+                Ocorreu um erro ao deletar sua conta!
+            </div>
+       <?php     
+        endif;
+        unset($_SESSION['falha_deletar']);
       ?>
+        <div class="dropdown">
+         <button class="btn btn-danger dropdown-toggle float-end" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+           Excluir Conta!
+         </button>
+         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+           <li><a class="dropdown-item" href="deletar_perfil_usuario.php" ><strong>Excluir</strong> conta permanentemente?</a></li>
+
+         </ul>
+        </div>
+      
                 <form action="editar_info_usuario_back.php" method="POST">
                     <div class="row g-3">
                         <div class="row g-3">

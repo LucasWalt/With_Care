@@ -10,7 +10,7 @@
 
   $cpf_usuario_logado = $_SESSION['usuario_logado'];
 
-  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, A.tp_usuario, B.cep, C.email_1, D.telefone_1, D.telefone_2,
+  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, A.tp_usuario, B.*, C.email_1, D.telefone_1, D.telefone_2,
                 E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
                 INNER JOIN endereco as B on A.id_usuario = B.id_usuario
                 INNER JOIN email as C on A.id_usuario = C.id_usuario 
@@ -22,8 +22,6 @@
 $execute = mysqli_query($conexao,$sql_code);
 
 $usuario = $execute->fetch_assoc();
-
-include('API_pesquisa_cep.php');
 
 $btn_salvar = "False";
 ?>
@@ -165,10 +163,10 @@ include('layouts/menu_principal.php');
 
   <h3 class="mt-5"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
-  <h5 class="pt-3"><?php echo $endereco->localidade; ?> - <?php echo $endereco->uf; ?></h5>
+  <h5 class="pt-3"><?php echo $usuario['cidade'] ?> - <?php echo $usuario['estado'] ?></h5>
 
-  <?php if ((isset($endereco->bairro)) && ($endereco->bairro != '')) : ?>
-    <h5 class="pt-3">Bairro <?php echo $endereco->bairro; ?></h5> 
+  <?php if ((isset($usuario['bairro'] )) && ($usuario['bairro']  != '')) : ?>
+    <h5 class="pt-3">Bairro <?php $usuario['bairro']  ?></h5> 
   <?php endif;?>
 
   <br>

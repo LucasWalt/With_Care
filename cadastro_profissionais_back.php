@@ -8,12 +8,20 @@
     $cpf =                     mysqli_real_escape_string($conexao, trim($_POST['cpf']));
     $cep =                     mysqli_real_escape_string($conexao, trim($_POST['cep']));
     $telefone =                mysqli_real_escape_string($conexao, trim($_POST['telefone']));
-    $senha =                   mysqli_real_escape_string($conexao, trim(md5($_POST['senha'])));
+    $senha =                   mysqli_real_escape_string($conexao, md5($_POST['senha']));
+    $confirma_senha =          mysqli_real_escape_string($conexao, md5($_POST['confirma_senha']));
     $cuida_bebe =              filter_input(INPUT_POST, 'cuida_bebe');
     $cuida_crianca =           filter_input(INPUT_POST, 'cuida_crianca');
     $cuida_adolescente =       filter_input(INPUT_POST, 'cuida_adolescente');
     $cuida_idoso =             filter_input(INPUT_POST, 'cuida_idoso');
     $cuida_especiais =         filter_input(INPUT_POST, 'cuida_especiais');
+
+    $erro = 0;
+    if ($senha != $confirma_senha) {
+        $erro = 1;
+        $_SESSION['senha_difere']    = TRUE;
+        header('Location: cadastro_profissionais_front.php');
+    }
 
     // Verifica se EMAIL ou CPF já estão cadastrados na base.
 
@@ -22,6 +30,7 @@
     $row = mysqli_fetch_assoc($result);
 
     if ($row['total'] == 1) {
+        $erro = 1;
         $_SESSION['cpf_existe'] = TRUE;
         header('Location: cadastro_profissionais_front.php');
         exit;
@@ -32,6 +41,7 @@
     $row = mysqli_fetch_assoc($result);
     
     if ($row['total'] == 1) {
+        $erro = 1;
         $_SESSION['email_existe'] = TRUE;
         header('Location: cadastro_profissionais_front.php');
         exit;
@@ -104,6 +114,7 @@
     };
 
     //  Verifica se foram realmente inseridos ou se .
+    if ($erro != 1) {
 
     if ($conexao->query($sql_usuario)       &&
         $conexao->query($sql_serv)          &&
@@ -122,8 +133,7 @@
         $_SESSION['falha_cadastro']   = TRUE;
         header('Location: cadastro_profissionais_front.php');
     }
-
-    $conexao->close();
-    exit();
+    }else {
+    }
 ?>
     

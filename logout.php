@@ -9,5 +9,7 @@
     };
     
     header('Location: index.php');
+    clearstatcache();
+    $conexao->close();
     exit();
 ?>

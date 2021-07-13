@@ -2,11 +2,23 @@
   session_start();
   include('conexao.php');
 
-  $sql = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, B.*, C.qt_votos, C.qt_pontos
-          FROM usuario AS A
-          INNER JOIN servico AS B ON A.id_usuario = B.id_usuario
-          INNER JOIN pontuacao_avaliacao AS C ON A.id_usuario = C.id_avaliado
-          WHERE tp_usuario = 'P' AND boosted = 'S'
+  include('geo_ip.php');
+
+  $sql = "SELECT A.id_usuario, A.nome, A.sobrenome, A.dir_foto_perfil,
+          E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 6670.5 * acos( cos( radians(
+          -- latitude
+          $data->latitude) ) * cos( radians( 
+          B.latitude ) ) * cos( radians( 
+          B.longitude ) - radians(
+          -- longitude
+          $data->longitude) ) + sin( radians(
+          -- latitude
+          $data->latitude) ) * sin( radians( 
+          B.latitude ) ) ) ) AS distancia FROM usuario AS A 
+          INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
+          INNER JOIN servico as E on A.id_usuario = E.id_usuario 
+          WHERE A.tp_usuario = 'P' 
+          HAVING distancia < 25 
           ORDER BY RAND(NOW()) LIMIT 3";
 
   $execute = mysqli_query($conexao,$sql);
@@ -128,7 +140,8 @@
       endif;
   ?> 
   </div>
-      
+  <br>
+            <p class="text-truncate ms-5 me-5">Distancia <?= number_format($usuario['distancia'],2);?> KM</p>
       
             <p class="m-3">Mais informações <i class="fas fa-angle-right"></i></p>
         </a>

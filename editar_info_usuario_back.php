@@ -145,8 +145,5 @@
            header('Location: editar_info_usuario_front.php');
         }
     };
-
-    $conexao->close();
-    exit();
 ?>
     

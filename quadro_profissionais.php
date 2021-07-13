@@ -15,8 +15,8 @@
     include('geo_ip.php');
 
     //Pegar usuarios do tipo "P"(profissional) do banco de dados 
-    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.descricao, A.tp_usuario, A.dir_foto_perfil,
-                 E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 3959 * acos( cos( radians(
+    $sql_code = "SELECT A.id_usuario, A.nome, A.sobrenome, A.dir_foto_perfil,
+                 E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 6670.5 * acos( cos( radians(
                  -- latitude
                  $data->latitude) ) * cos( radians( 
                  B.latitude ) ) * cos( radians( 
@@ -28,7 +28,10 @@
                  B.latitude ) ) ) ) AS distancia FROM usuario AS A 
                  INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
                  INNER JOIN servico as E on A.id_usuario = E.id_usuario 
-                 WHERE A.tp_usuario = 'P' LIMIT $inicio, $perfis_por_pagina;";
+                 WHERE A.tp_usuario = 'P' 
+                 HAVING distancia < 25 
+                 ORDER BY RAND(NOW()) 
+                 LIMIT $inicio, $perfis_por_pagina;";
 
     $execute = mysqli_query($conexao,$sql_code);
 
