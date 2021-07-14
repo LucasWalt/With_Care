@@ -114,7 +114,7 @@ $usuario = $execute->fetch_assoc();
            Excluir Conta!
          </button>
          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-           <li><a class="dropdown-item" href="deletar_perfil_usuario.php" ><strong>Excluir</strong> conta permanentemente?</a></li>
+           <li><a class="dropdown-item" href="deletar_perfil_usuario.php" ><strong>Excluir conta permanentemente</strong> </a></li>
 
          </ul>
         </div>

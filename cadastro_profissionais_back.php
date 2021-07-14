@@ -113,27 +113,27 @@
                           where id_usuario = (select id_usuario from usuario where cpf = '$cpf')";        
     };
 
-    //  Verifica se foram realmente inseridos ou se .
-    if ($erro != 1) {
+               //  Verifica se foram realmente inseridos ou se .
+               if ($erro != 1) {
 
-    if ($conexao->query($sql_usuario)       &&
-        $conexao->query($sql_serv)          &&
-        $conexao->query($sql_endereco)      &&
-        $conexao->query($sql_email)         &&
-        $conexao->query($sql_telefone)      && 
-        $conexao->query($sql_adolescente)   &&
-        $conexao->query($sql_idoso)         &&
-        $conexao->query($sql_especiais)     &&
-        $conexao->query($sql_crianca)       &&
-        $conexao->query($sql_bebe))         {
-        
-        $_SESSION['sucesso_cadastro'] = TRUE;
-        header('Location: cadastro_profissionais_front.php');
-    }else{
-        $_SESSION['falha_cadastro']   = TRUE;
-        header('Location: cadastro_profissionais_front.php');
-    }
-    }else {
-    }
-?>
+               if ($conexao->query($sql_usuario)       &&
+                   $conexao->query($sql_serv)          &&
+                   $conexao->query($sql_endereco)      &&
+                   $conexao->query($sql_email)         &&
+                   $conexao->query($sql_telefone)      && 
+                   $conexao->query($sql_adolescente)   &&
+                   $conexao->query($sql_idoso)         &&
+                   $conexao->query($sql_especiais)     &&
+                   $conexao->query($sql_crianca)       &&
+                   $conexao->query($sql_bebe))         {
+                
+                   $_SESSION['sucesso_cadastro'] = TRUE;
+                   header('Location: cadastro_profissionais_front.php');
+               }else{
+                   $_SESSION['falha_cadastro']   = TRUE;
+                   header('Location: cadastro_profissionais_front.php');
+               }
+               }else {
+               }
+            ?>
     

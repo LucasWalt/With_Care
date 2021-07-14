@@ -4,26 +4,68 @@
 
   include('geo_ip.php');
 
-  $sql = "SELECT A.id_usuario, A.nome, A.sobrenome, A.dir_foto_perfil,
-          E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 6670.5 * acos( cos( radians(
-          -- latitude
-          $data->latitude) ) * cos( radians( 
-          B.latitude ) ) * cos( radians( 
-          B.longitude ) - radians(
-          -- longitude
-          $data->longitude) ) + sin( radians(
-          -- latitude
-          $data->latitude) ) * sin( radians( 
-          B.latitude ) ) ) ) AS distancia FROM usuario AS A 
-          INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
-          INNER JOIN servico as E on A.id_usuario = E.id_usuario 
-          WHERE A.tp_usuario = 'P' 
-          HAVING distancia < 25 
-          ORDER BY RAND(NOW()) LIMIT 3";
+  if (isset($_SESSION['usuario_logado'])){
+    
+    $user = $_SESSION['usuario_logado'];
+
+    $sql = "SELECT a.latitude, a.longitude from  endereco AS a 
+    INNER JOIN usuario AS B on A.id_usuario = B.id_usuario 
+    where cpf = '$user'";
+
+    $execute = mysqli_query($conexao,$sql);
+
+    $usuario_logado = $execute->fetch_assoc();
+
+    $latitude = $usuario_logado['latitude'];
+
+    $longitude = $usuario_logado['longitude'];
+
+    $sql1 = "SELECT A.id_usuario, A.nome, A.sobrenome, A.dir_foto_perfil,
+         E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 6371.5 * acos( cos( radians(
+         -- latitude
+         $latitude) ) * cos( radians( 
+         B.latitude ) ) * cos( radians( 
+         B.longitude ) - radians(
+         -- longitude
+         $longitude) ) + sin( radians(
+         -- latitude
+         $latitude) ) * sin( radians( 
+         B.latitude ) ) ) ) AS distancia FROM usuario AS A 
+         INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
+         INNER JOIN servico as E on A.id_usuario = E.id_usuario 
+         WHERE A.tp_usuario = 'P' 
+         HAVING distancia < 50 
+         ORDER BY RAND(NOW()) LIMIT 3";
+
+$execute = mysqli_query($conexao,$sql1);
+
+$usuario = $execute->fetch_assoc();
+  }else{
+
+    $sql = "SELECT A.id_usuario, A.nome, A.sobrenome, A.dir_foto_perfil,
+         E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, B.*, ( 6371.5 * acos( cos( radians(
+         -- latitude
+         $data->latitude) ) * cos( radians( 
+         B.latitude ) ) * cos( radians( 
+         B.longitude ) - radians(
+         -- longitude
+         $data->longitude) ) + sin( radians(
+         -- latitude
+         $data->latitude) ) * sin( radians( 
+         B.latitude ) ) ) ) AS distancia FROM usuario AS A 
+         INNER JOIN endereco AS B on A.id_usuario = B.id_usuario
+         INNER JOIN servico as E on A.id_usuario = E.id_usuario 
+         WHERE A.tp_usuario = 'P' 
+         HAVING distancia < 50 
+         ORDER BY RAND(NOW()) LIMIT 3";
 
   $execute = mysqli_query($conexao,$sql);
 
   $usuario = $execute->fetch_assoc();
+    
+  };
+  
+ 
 ?>
 <!doctype html>
 <html lang="en">

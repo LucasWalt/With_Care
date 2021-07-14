@@ -1,7 +1,7 @@
 <?php
   session_start();
   include('conexao.php');
-
+  Error_reporting (0);
   if (isset($_SESSION['usuario_logado'])){
 
   }else{
@@ -10,13 +10,12 @@
 
   $cpf_usuario_logado = $_SESSION['usuario_logado'];
 
-  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, A.tp_usuario, B.*, C.email_1, D.telefone_1, D.telefone_2,
-                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais, F.qt_votos, F.qt_pontos, F.id_avaliado FROM usuario as A 
+  $sql_code = "SELECT A.nome, A.sobrenome, A.descricao, A.dir_foto_perfil, A.tp_usuario, B.bairro,B.rua,B.cidade, C.email_1, D.telefone_1,
+                E.bebes, E.criancas, E.adolescentes, E.idosos, E.especiais FROM usuario as A 
                 INNER JOIN endereco as B on A.id_usuario = B.id_usuario
                 INNER JOIN email as C on A.id_usuario = C.id_usuario 
                 INNER JOIN telefone as D on A.id_usuario = D.id_usuario 
                 INNER JOIN servico as E on A.id_usuario = E.id_usuario 
-                INNER JOIN pontuacao_avaliacao as F on A.id_usuario = F.id_avaliado 
                 WHERE A.cpf = '$cpf_usuario_logado'";
 
 $execute = mysqli_query($conexao,$sql_code);
@@ -24,6 +23,7 @@ $execute = mysqli_query($conexao,$sql_code);
 $usuario = $execute->fetch_assoc();
 
 $btn_salvar = "False";
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -163,10 +163,10 @@ include('layouts/menu_principal.php');
 
   <h3 class="mt-5"><?= $usuario['nome'], $espaco=" ", $usuario['sobrenome'] ?></h3>
 
-  <h5 class="pt-3"><?php echo $usuario['cidade'] ?> - <?php echo $usuario['estado'] ?></h5>
+  <h5 class="pt-3"><?php echo $usuario['cidade'] ?>  <?php echo $usuario['estado'] ?></h5>
 
   <?php if ((isset($usuario['bairro'] )) && ($usuario['bairro']  != '')) : ?>
-    <h5 class="pt-3">Bairro <?php $usuario['bairro']  ?></h5> 
+    <h5 class="pt-3">Bairro <?php echo $usuario['bairro'];  ?></h5> 
   <?php endif;?>
 
   <br>
@@ -177,35 +177,35 @@ include('layouts/menu_principal.php');
   <h5>Cuido de...</h5>
   <div class="mt-3" style="width: 300px">
   <?php
-      if ($usuario['especiais'] == 1):
+      if (($usuario['especiais'] == 1) && ($usuario['especiais'] != '') ):
   ?>
     <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #CD03FF;">
       Especiais
     </div>
   <?php
       endif;
-      if ($usuario['criancas'] == 1):
+      if (($usuario['criancas'] == 1) && ($usuario['especiais'] != '') ):
   ?>
     <div class="rounded-pill p-2 mb-2 text-dark d-inline-flex border border-dark" style="background-color: #F3F76C;">
       Crianças
     </div>
   <?php
       endif;
-      if ($usuario['adolescentes'] == 1):
+      if (($usuario['adolescentes'] == 1) && ($usuario['especiais'] != '') ):
   ?>
     <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #FF4561;">
       Adolescentes
     </div>
   <?php
       endif;
-      if ($usuario['idosos'] == 1):
+      if (($usuario['idosos'] == 1) && ($usuario['especiais'] != '') ):
   ?>
     <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #FFAF03;">
       Idosos
     </div>
   <?php
       endif;
-      if ($usuario['bebes'] == 1):
+      if (($usuario['bebes'] == 1) && ($usuario['especiais'] != '') ):
   ?>
     <div class="rounded-pill p-2 mb-2 text-white d-inline-flex border border-dark" style="background-color: #40C5EB;">
       Bebês
@@ -215,7 +215,9 @@ include('layouts/menu_principal.php');
   ?> 
   </div>
 
-  <p class="pt-4 lh-lg"><?=$usuario['descricao'] ?></p>
+  <p class="fs-5 mt-5">Mais sobre <?= $usuario['nome']?>...</p>
+
+<p class="pt-4 lh-lg" style="padding: 0% 10% 0 10%"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= $usuario['descricao'] ?></p>
   <?php
   }  
   ?>
